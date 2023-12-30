@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +8,31 @@
     body {
       font-family: arial;
     }
-    div {
+    
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      display: block;
+      background: rgb(187 187 187);
+    }
+    
+    body::before {
+      top: 50%;
+      width: 100vw;
+      height: 1px;
+    }
+    
+    body::after {
+      left: 50%;
+      width: 1px;
+      height: 100vh;
+    }
+    
+    h1 {
       position: fixed;
     }
+    
     button {
       font: inherit;
     }
@@ -19,39 +40,30 @@
 </head>
 <body>
 
-<button onclick="more()">how do i center in css?</button>
+<button onclick="how()">how do i center in css?</button>
 
 <script>
-  
   let button = document.querySelector('button');
   
   console.log(button);
   
-  function more() {
+  function how() {
 
     var x = window.innerWidth;
     var y = window.innerHeight;
 
-    // Create an "li" node:
-    const node = document.createElement("div");
-
-    // Create a text node:
+    const node = document.createElement("h1");
     const textnode = document.createTextNode("you don't");
-
-    // Append the text node to the "li" node:
+    
     node.appendChild(textnode);
-
-    // Append the "li" node to the list:
     document.querySelector("body").appendChild(node);
 
     node.style.left = (Math.random() * x + 0) + "px";
     node.style.top = (Math.random() * y + 0) + "px";
     
     button.disabled = true;
-    
 
   };
-  
 </script>
 </body>
 </html>
