@@ -3,9 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <title></title>
+  <title>how do i center in css?</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
       font-family: arial;
     }
     
@@ -14,33 +21,60 @@
       content: "";
       position: fixed;
       display: block;
-      background: rgb(187 187 187);
+      background: rgb(255 0 0 / 40%);
+    }
+
+    body.draw::before {
+      width: 100vw;
+    }
+
+    body.draw::after {
+      height: 100vh;
     }
     
     body::before {
       top: 50%;
-      width: 100vw;
+      width: 0;
       height: 1px;
+      transition: width 1s ease 1s;
     }
     
     body::after {
       left: 50%;
       width: 1px;
-      height: 100vh;
+      height: 0;
+      transition: height 1s ease 2s;
     }
     
     h1 {
       position: fixed;
+      font-size: 6.66vmin;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(2deg);
+      z-index: 9;
     }
     
     button {
-      font: inherit;
+      background: transparent;
+      border: 1px solid black;
+      border-radius: 100%;
+      cursor: pointer;
+      padding: 4.44vmin 4.44vmin;
+      font-family: inherit;
+      font-size: 3.33vmin;
+      transition: opacity .75s linear;
+    }
+
+    button:hover {
+      background: black;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-<button onclick="how()">how do i center in css?</button>
+<button>how do i center in css?</button>
 
 <script>
   let button = document.querySelector('button');
@@ -49,21 +83,31 @@
   
   function how() {
 
-    var x = window.innerWidth;
-    var y = window.innerHeight;
-
     const node = document.createElement("h1");
     const textnode = document.createTextNode("you don't");
     
     node.appendChild(textnode);
     document.querySelector("body").appendChild(node);
 
+    var x = window.innerWidth - node.clientWidth;
+    var y = window.innerHeight - node.clientHeight;
+    console.log(x,y);
+
     node.style.left = (Math.random() * x + 0) + "px";
     node.style.top = (Math.random() * y + 0) + "px";
-    
-    button.disabled = true;
-
+    //node.style.left = (node.offsetLeft + (Math.random() * x + 0)) + "px";
+    //node.style.top = (node.offsetTop + (Math.random() * y + 0)) + "px";
   };
+
+  button.addEventListener("click", (event) => {
+    button.disabled = true;
+    button.style.opacity = 0;
+    document.body.classList.add("draw");
+
+    setTimeout(() => {
+      how();
+    }, 4000);
+  });
 </script>
 </body>
 </html>
